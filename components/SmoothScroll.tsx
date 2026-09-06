@@ -4,10 +4,14 @@ import { useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 
-declare global {
-  interface Window {
-    lenis?: Lenis;
+let scroller: Lenis | null = null;
+
+export function scrollPageTo(top: number, instant = false) {
+  if (scroller) {
+    scroller.scrollTo(top, { immediate: instant });
+    return;
   }
+  window.scrollTo({ top, behavior: instant ? "auto" : "smooth" });
 }
 
 export function SmoothScroll() {
@@ -23,7 +27,7 @@ export function SmoothScroll() {
       smoothWheel: true,
       touchMultiplier: 1.1,
     });
-    window.lenis = lenis;
+    scroller = lenis;
 
     let frame = 0;
     const raf = (time: number) => {
@@ -34,8 +38,8 @@ export function SmoothScroll() {
 
     return () => {
       window.cancelAnimationFrame(frame);
-      if (window.lenis === lenis) {
-        delete window.lenis;
+      if (scroller === lenis) {
+        scroller = null;
       }
       lenis.destroy();
     };

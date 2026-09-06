@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { site } from "@/content/site";
+import { scrollPageTo } from "@/components/SmoothScroll";
 
 const cardSlots = {
   bear: "left-[21%] top-[42%] h-[39%] w-[41%]",
@@ -55,11 +56,7 @@ export function Friends() {
 
     const total = section.offsetHeight - window.innerHeight;
     const top = section.offsetTop + ((index + 0.35) / count) * total;
-    if (window.lenis) {
-      window.lenis.scrollTo(top, { immediate: Boolean(reduceMotion) });
-      return;
-    }
-    window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
+    scrollPageTo(top, Boolean(reduceMotion));
   };
 
   return (
