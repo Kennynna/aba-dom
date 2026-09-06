@@ -16,6 +16,14 @@ export function Hero() {
       aria-labelledby="hero-brand"
     >
       <BlobField />
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
+        style={{
+          backgroundImage: "url('/svg/pattern-stars.svg')",
+          backgroundSize: "480px 480px",
+        }}
+        aria-hidden
+      />
 
       <div className="relative mx-auto flex min-h-[calc(100svh-5rem)] max-w-6xl flex-col justify-end px-5 pb-16 pt-16 md:min-h-[calc(100svh-6rem)] md:justify-center md:px-8 md:pb-24">
         <motion.span

@@ -58,7 +58,7 @@ export function Header() {
             whileHover={reduceMotion ? undefined : { y: -2 }}
             whileTap={reduceMotion ? undefined : { y: 2, boxShadow: "0 1px 0 #ee5253" }}
           >
-            Записаться
+            Контакты
           </motion.a>
         </nav>
 
@@ -111,7 +111,7 @@ export function Header() {
                 className="mt-1 rounded-full bg-coral px-3 py-3 text-center text-base font-bold text-white"
                 onClick={close}
               >
-                Записаться
+                Контакты
               </a>
             </nav>
           </motion.div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const nunito = Nunito({
   variable: "--font-display",
@@ -23,7 +24,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ru" className={`${nunito.variable} ${nunitoBody.variable} h-full antialiased`}>
-      <body className="min-h-full font-sans text-ink">{children}</body>
+      <body className="min-h-full font-sans text-ink">
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
