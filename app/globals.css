@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #fff6eb;
+  --bg-elevated: #ffffff;
+  --ink: #2a2140;
+  --muted: #6a5f7a;
+  --coral: #ff6b6b;
+  --coral-hover: #ee5253;
+  --sun: #ffc43d;
+  --mint: #3ddc97;
+  --sky: #5bb8ff;
+  --berry: #8b7cff;
+  --peach: #ffb087;
+  --line: #f0dcc8;
+  --white: #ffffff;
+  --focus: #5bb8ff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-coral: var(--coral);
+  --color-coral-hover: var(--coral-hover);
+  --color-sun: var(--sun);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+  --color-berry: var(--berry);
+  --color-peach: var(--peach);
+  --color-line: var(--line);
+  --color-white: var(--white);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--sun) 55%, white);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.play-dots {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--peach) 55%, transparent) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+}
