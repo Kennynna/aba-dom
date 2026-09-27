@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { useSafeReducedMotion } from "./motion/useSafeReducedMotion";
 import { site } from "@/content/site";
-import { LogoMark } from "@/components/LogoMark";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -27,93 +28,125 @@ export function Header() {
   const close = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto flex h-16 max-w-6xl items-center justify-between rounded-[1.6rem] px-4 transition-[background,box-shadow] duration-300 md:h-[4.25rem] md:px-6 ${
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full bg-cream/92 px-4 backdrop-blur-md transition-shadow duration-500 md:h-[4.5rem] md:px-6 ${
           scrolled || open
-            ? "border border-white/70 bg-white/90 shadow-[0_10px_0_rgba(255,196,61,0.35)] backdrop-blur-md"
-            : "border border-transparent bg-white/40 backdrop-blur-sm"
+            ? "shadow-[0_12px_32px_-16px_rgba(31,26,23,0.45)]"
+            : "shadow-[0_10px_24px_-18px_rgba(31,26,23,0.28)]"
         }`}
       >
-        <a href="#top" className="flex items-center gap-2.5" onClick={close}>
-          <LogoMark />
-          <span className="font-display text-xl font-extrabold tracking-tight text-ink md:text-2xl">
+        <a
+          href="#top"
+          className="flex items-center gap-2.5"
+          onClick={close}
+          aria-label={`${site.brand} — на главную`}
+        >
+          <Image
+            src="/brand/house-orange.png"
+            alt=""
+            width={44}
+            height={48}
+            className="h-8 w-auto object-contain md:h-9"
+            priority
+          />
+          <span className="font-display text-2xl leading-none text-orange md:text-[1.75rem]">
             {site.brand}
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Основная навигация">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
           {site.nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[0.95rem] font-semibold text-muted transition-colors hover:text-ink"
+              className="text-[0.95rem] font-medium text-muted transition-colors duration-300 hover:text-ink"
             >
               {item.label}
             </a>
           ))}
-          <motion.a
-            href="#contact"
-            className="rounded-full bg-coral px-5 py-2.5 text-[0.95rem] font-bold text-white shadow-[0_5px_0_#ee5253]"
-            whileHover={reduceMotion ? undefined : { y: -2 }}
-            whileTap={reduceMotion ? undefined : { y: 2, boxShadow: "0 1px 0 #ee5253" }}
-          >
-            Контакты
-          </motion.a>
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border-2 border-ink/10 bg-white text-ink md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Закрыть меню" : "Открыть меню"}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="sr-only">Меню</span>
-          <span className="relative block h-3.5 w-4">
-            <span
-              className={`absolute left-0 top-0 h-0.5 w-full bg-ink transition ${open ? "translate-y-[6px] rotate-45" : ""}`}
-            />
-            <span
-              className={`absolute left-0 top-[6px] h-0.5 w-full bg-ink transition ${open ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`absolute left-0 top-[12px] h-0.5 w-full bg-ink transition ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-            />
-          </span>
-        </button>
+        <div className="flex items-center gap-2">
+          <a
+            href={site.contacts.phoneHref}
+            className="lift inline-flex min-h-11 items-center rounded-full bg-orange px-4 text-sm font-semibold text-ink md:px-5 md:text-[0.95rem]"
+          >
+            Позвонить
+          </a>
+
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-orange/12 transition-colors duration-300 lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Закрыть меню" : "Открыть меню"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="relative block h-3.5 w-4.5">
+              {[0, 1, 2].map((line) => (
+                <span
+                  key={line}
+                  className={`absolute left-0 h-[2px] w-full rounded bg-ink transition-all duration-300 ${
+                    line === 0
+                      ? open
+                        ? "top-[6px] rotate-45"
+                        : "top-0"
+                      : line === 1
+                        ? open
+                          ? "top-[6px] opacity-0"
+                          : "top-[6px] opacity-100"
+                        : open
+                          ? "top-[6px] -rotate-45"
+                          : "top-[12px]"
+                  }`}
+                />
+              ))}
+            </span>
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
         {open ? (
           <motion.div
             id="mobile-menu"
-            className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-[1.4rem] border border-white/80 bg-white md:hidden"
-            initial={reduceMotion ? false : { height: 0, opacity: 0 }}
-            animate={reduceMotion ? undefined : { height: "auto", opacity: 1 }}
-            exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            className="fixed inset-0 top-0 -z-10 bg-cream px-6 pb-10 pt-24 lg:hidden"
+            initial={reduceMotion ? undefined : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Мобильная навигация">
-              {site.nav.map((item) => (
-                <a
+            <nav className="flex flex-col" aria-label="Мобильная навигация">
+              {site.nav.map((item, index) => (
+                <motion.a
                   key={item.href}
                   href={item.href}
-                  className="rounded-2xl px-3 py-3 text-base font-semibold text-ink"
+                  className="border-b border-line py-4 font-sans text-xl font-medium text-ink"
                   onClick={close}
+                  initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05 + index * 0.06 }}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
               <a
                 href="#contact"
-                className="mt-1 rounded-full bg-coral px-3 py-3 text-center text-base font-bold text-white"
+                className="border-b border-line py-4 font-sans text-xl font-medium text-ink"
                 onClick={close}
               >
                 Контакты
               </a>
             </nav>
+
+            <a
+              href={site.contacts.phoneHref}
+              className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-orange px-6 text-base font-semibold text-ink"
+              onClick={close}
+            >
+              {site.contacts.phone}
+            </a>
           </motion.div>
         ) : null}
       </AnimatePresence>

@@ -1,38 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #fff6eb;
-  --bg-elevated: #ffffff;
-  --ink: #2a2140;
-  --muted: #6a5f7a;
-  --coral: #ff6b6b;
-  --coral-hover: #ee5253;
-  --sun: #ffc43d;
-  --mint: #3ddc97;
-  --sky: #5bb8ff;
-  --berry: #8b7cff;
-  --peach: #ffb087;
-  --line: #f0dcc8;
-  --white: #ffffff;
-  --focus: #5bb8ff;
+  --cream: #fff1d1;
+  --cream-deep: #fbe4ba;
+  --orange: #f88640;
+  --salmon: #e76f51;
+  --blue: #5a9cb5;
+  --blue-deep: #427a91;
+  --red: #dd4b40;
+  --ink: #1f1a17;
+  --muted: #6b5e55;
+  --line: #efdcb6;
+  /* Тот же синий, чуть глубже: кремовый текст на нём уже читается */
+  --blue-field: color-mix(in srgb, var(--blue) 65%, var(--ink));
+  --blue-foot: color-mix(in srgb, var(--blue) 42%, var(--ink));
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-bg-elevated: var(--bg-elevated);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-orange: var(--orange);
+  --color-salmon: var(--salmon);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-field: var(--blue-field);
+  --color-blue-foot: var(--blue-foot);
+  --color-red: var(--red);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-coral: var(--coral);
-  --color-coral-hover: var(--coral-hover);
-  --color-sun: var(--sun);
-  --color-mint: var(--mint);
-  --color-sky: var(--sky);
-  --color-berry: var(--berry);
-  --color-peach: var(--peach);
   --color-line: var(--line);
-  --color-white: var(--white);
-  --font-display: var(--font-display);
-  --font-sans: var(--font-body);
+  --font-display: var(--font-lena);
+  --font-sans: var(--font-commissioner);
 }
 
 html {
@@ -44,48 +42,123 @@ html.lenis body {
   height: auto;
 }
 
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-commissioner), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
 section[id] {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 5.5rem;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--orange) 40%, white);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Градиенты из фирменного кита */
+.grad-warm {
+  background-image: linear-gradient(180deg, var(--orange) 0%, var(--salmon) 100%);
+}
+
+.grad-ember {
+  background-image: linear-gradient(100deg, var(--red) 0%, var(--orange) 100%);
+}
+
+.grad-calm {
+  background-image: linear-gradient(180deg, var(--cream) 0%, var(--blue) 100%);
+}
+
+/* Плитка домиков. Цвет задаётся background-color, форма — маской */
+.houses {
+  --tile: 88px;
+  mask-image: var(--houses-src);
+  mask-size: var(--tile);
+  mask-repeat: repeat;
+  -webkit-mask-image: var(--houses-src);
+  -webkit-mask-size: var(--tile);
+  -webkit-mask-repeat: repeat;
+}
+
+.houses-plate {
+  --tile: 140px;
+}
+
+/* На карточках домики остаются по краю, чтобы не спорить с текстом */
+.houses-edge {
+  -webkit-mask-image: var(--houses-src), linear-gradient(145deg, transparent 0%, #000 70%);
+  -webkit-mask-size: var(--tile), cover;
+  -webkit-mask-repeat: repeat, no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-image: var(--houses-src), linear-gradient(145deg, transparent 0%, #000 70%);
+  mask-size: var(--tile), cover;
+  mask-repeat: repeat, no-repeat;
+  mask-composite: intersect;
+}
+
+@media (min-width: 768px) {
+  .houses {
+    --tile: 104px;
+  }
+
+  .houses-plate {
+    --tile: 190px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .houses {
+    --tile: 120px;
+  }
+
+  .houses-plate {
+    --tile: 230px;
+  }
+}
+
+/* Медленный дрейф фона внутри тёплого градиента */
+.warm-drift {
+  background-size: 100% 240%;
+  animation: warm-drift 28s ease-in-out infinite;
+}
+
+@keyframes warm-drift {
+  0%,
+  100% {
+    background-position: 50% 8%;
+  }
+  50% {
+    background-position: 50% 92%;
+  }
+}
+
+/* Подъём только там, где есть настоящий hover. На таче класс не залипает */
+@media (hover: hover) and (pointer: fine) {
+  .lift {
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+  }
+
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px -14px rgba(31, 26, 23, 0.4);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body), system-ui, sans-serif;
-}
-
-::selection {
-  background: color-mix(in srgb, var(--sun) 55%, white);
-  color: var(--ink);
-}
-
-:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.play-dots {
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--peach) 55%, transparent) 1.4px, transparent 1.6px);
-  background-size: 22px 22px;
-}
-
-.chess-board {
-  background-image:
-    linear-gradient(45deg, color-mix(in srgb, var(--sun) 16%, transparent) 25%, transparent 25%),
-    linear-gradient(-45deg, color-mix(in srgb, var(--coral) 10%, transparent) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--sky) 12%, transparent) 75%),
-    linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--berry) 10%, transparent) 75%);
-  background-size: 48px 48px;
-  background-position: 0 0, 0 24px, 24px -24px, -24px 0;
-  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
-}
-
-.chess-tile {
-  box-shadow: 4px 4px 0 rgba(42, 33, 64, 0.12);
+  .warm-drift {
+    animation: none;
+    background-size: 100% 100%;
+  }
 }

@@ -4,16 +4,6 @@ import { useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 
-let scroller: Lenis | null = null;
-
-export function scrollPageTo(top: number, instant = false) {
-  if (scroller) {
-    scroller.scrollTo(top, { immediate: instant });
-    return;
-  }
-  window.scrollTo({ top, behavior: instant ? "auto" : "smooth" });
-}
-
 export function SmoothScroll() {
   const reduceMotion = useReducedMotion();
 
@@ -22,12 +12,8 @@ export function SmoothScroll() {
       return;
     }
 
-    const lenis = new Lenis({
-      duration: 1.15,
-      smoothWheel: true,
-      touchMultiplier: 1.1,
-    });
-    scroller = lenis;
+    // На тач-устройствах остаётся нативный скролл: syncTouch не включаем
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
 
     let frame = 0;
     const raf = (time: number) => {
@@ -38,9 +24,6 @@ export function SmoothScroll() {
 
     return () => {
       window.cancelAnimationFrame(frame);
-      if (scroller === lenis) {
-        scroller = null;
-      }
       lenis.destroy();
     };
   }, [reduceMotion]);
