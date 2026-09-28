@@ -102,27 +102,15 @@ export function Hero() {
                 }
           }
         >
-          {/* Кремовый знак дома с оранжевым словом внутри */}
-          <div className="relative">
-            <Image
-              src="/brand/house-cream.png"
-              alt=""
-              width={700}
-              height={760}
-              priority
-              sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 460px"
-              className="h-auto w-full object-contain drop-shadow-[0_24px_40px_rgba(31,26,23,0.18)]"
-            />
-            <Image
-              src="/brand/wordmark-word-orange.png"
-              alt={site.brand}
-              width={900}
-              height={583}
-              priority
-              sizes="(max-width: 640px) 130px, (max-width: 1024px) 160px, 210px"
-              className="absolute left-1/2 top-[58%] w-[46%] -translate-x-1/2 -translate-y-1/2 object-contain"
-            />
-          </div>
+          <Image
+            src="/brand/silhouette-play.png"
+            alt=""
+            width={1400}
+            height={886}
+            priority
+            sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 460px"
+            className="h-auto w-full object-contain drop-shadow-[0_24px_40px_rgba(31,26,23,0.18)]"
+          />
         </motion.div>
       </div>
 

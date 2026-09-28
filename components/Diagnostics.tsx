@@ -26,17 +26,17 @@ export function Diagnostics() {
             <StaggerItem
               as="li"
               key={sign.number}
-              className="lift relative flex flex-col overflow-hidden rounded-[2rem] bg-cream-deep/70 p-6 md:p-7"
+              className="lift relative flex flex-col overflow-hidden rounded-[2rem] bg-orange p-6 md:p-7"
             >
-              <HousePattern color="rgb(248 134 64 / 0.14)" />
+              <HousePattern color="rgb(255 241 209 / 0.16)" />
               <div className="relative">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-orange font-display text-lg text-ink">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-cream font-display text-lg text-orange">
                   {sign.number}
                 </span>
-                <h3 className="mt-5 font-display text-xl leading-tight text-ink md:text-2xl">
+                <h3 className="mt-5 font-display text-xl leading-tight text-white md:text-2xl">
                   {sign.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-muted">{sign.text}</p>
+                <p className="mt-3 text-base leading-relaxed text-white">{sign.text}</p>
               </div>
             </StaggerItem>
           ))}
