@@ -25,7 +25,6 @@ export function Contact() {
               id="contact-title"
               eyebrow={contact.eyebrow}
               title={contact.title}
-              lead={contact.lead}
               tone="cream"
             />
 
@@ -36,7 +35,6 @@ export function Contact() {
               >
                 {contacts.phone}
               </a>
-              <p className="mt-4 text-base text-cream">{contacts.manager}</p>
             </Reveal>
           </div>
 
@@ -65,9 +63,6 @@ export function Contact() {
           ))}
         </Stagger>
 
-        <Reveal delay={0.1}>
-          <p className="mt-6 text-base text-cream">{contacts.addressNote}</p>
-        </Reveal>
       </div>
     </section>
   );

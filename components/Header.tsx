@@ -55,12 +55,12 @@ export function Header() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Основная навигация">
           {site.nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[0.95rem] font-medium text-muted transition-colors duration-300 hover:text-ink"
+              className="font-display text-[0.95rem] font-bold tracking-[0.04em] text-orange uppercase transition-colors duration-300 hover:text-ink"
             >
               {item.label}
             </a>
@@ -70,7 +70,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <a
             href={site.contacts.phoneHref}
-            className="lift inline-flex min-h-11 items-center rounded-full bg-orange px-4 text-sm font-semibold text-ink md:px-5 md:text-[0.95rem]"
+            className="lift inline-flex min-h-11 items-center rounded-full bg-orange px-4 text-sm font-semibold text-white md:px-5 md:text-[0.95rem]"
           >
             Позвонить
           </a>
@@ -122,7 +122,7 @@ export function Header() {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  className="border-b border-line py-4 font-sans text-xl font-medium text-ink"
+                  className="border-b border-line py-4 font-display text-xl font-bold tracking-[0.04em] text-orange uppercase"
                   onClick={close}
                   initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -133,7 +133,7 @@ export function Header() {
               ))}
               <a
                 href="#contact"
-                className="border-b border-line py-4 font-sans text-xl font-medium text-ink"
+                className="border-b border-line py-4 font-display text-xl font-bold tracking-[0.04em] text-orange uppercase"
                 onClick={close}
               >
                 Контакты
@@ -142,7 +142,7 @@ export function Header() {
 
             <a
               href={site.contacts.phoneHref}
-              className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-orange px-6 text-base font-semibold text-ink"
+              className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-orange px-6 text-base font-semibold text-white"
               onClick={close}
             >
               {site.contacts.phone}

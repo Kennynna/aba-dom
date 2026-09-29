@@ -8,6 +8,7 @@ import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { HousePattern } from "@/components/motion/HousePattern";
 
 const blocks = [price.programs, price.tutoring, price.consultations];
+const blockTones = ["#3CCB4E", "#8B5CFF", "#FF4D4D"];
 
 export function Price() {
   return (
@@ -76,23 +77,26 @@ export function Price() {
         </div>
 
         <Stagger as="ul" className="mt-5 grid gap-5 md:grid-cols-3" step={0.1}>
-          {blocks.map((block) => (
+          {blocks.map((block, index) => (
             <StaggerItem
               as="li"
               key={block.title}
-              className="rounded-[2rem] bg-orange p-6 md:p-7"
+              className="rounded-[2rem] p-6 md:p-7"
+              style={{ backgroundColor: blockTones[index] }}
             >
               <h3 className="font-sans text-xl font-bold text-white md:text-2xl">{block.title}</h3>
               <dl className="mt-5 flex flex-col gap-3.5">
                 {block.items.map((row) => (
                   <div
                     key={row.name}
-                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-white/30 pb-3.5 last:border-b-0 last:pb-0"
+                    className="flex items-baseline justify-between gap-x-4 border-b border-white/30 pb-3.5 last:border-b-0 last:pb-0"
                   >
-                    <dt className="max-w-[24ch] text-base font-bold leading-snug text-white">
+                    <dt className="min-w-0 text-base font-bold leading-snug text-white">
                       {row.name}
                     </dt>
-                    <dd className="font-sans text-lg font-bold text-white md:text-xl">{row.price}</dd>
+                    <dd className="shrink-0 text-right font-sans text-lg font-bold whitespace-nowrap text-white md:text-xl">
+                      {row.price}
+                    </dd>
                   </div>
                 ))}
               </dl>

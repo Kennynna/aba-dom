@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "./useSafeReducedMotion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type StaggerProps = {
   children: ReactNode;
@@ -16,6 +16,7 @@ type StaggerProps = {
 type ItemProps = {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   as?: "div" | "li" | "article";
 };
 
@@ -60,18 +61,22 @@ export function Stagger({
   );
 }
 
-export function StaggerItem({ children, className, as = "div" }: ItemProps) {
+export function StaggerItem({ children, className, style, as = "div" }: ItemProps) {
   const reduceMotion = useSafeReducedMotion();
 
   if (reduceMotion) {
     const Plain = as;
-    return <Plain className={className}>{children}</Plain>;
+    return (
+      <Plain className={className} style={style}>
+        {children}
+      </Plain>
+    );
   }
 
   const Tag = motion[as];
 
   return (
-    <Tag className={className} variants={itemVariants}>
+    <Tag className={className} style={style} variants={itemVariants}>
       {children}
     </Tag>
   );

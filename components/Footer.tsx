@@ -14,7 +14,6 @@ export function Footer() {
             sizes="160px"
             className="h-auto w-28 object-contain md:w-32"
           />
-          <p className="mt-6 text-base leading-relaxed text-cream/90">{site.footer.note}</p>
         </div>
 
         <nav className="flex flex-col gap-3 text-base" aria-label="Навигация в подвале">
