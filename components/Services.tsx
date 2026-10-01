@@ -28,7 +28,7 @@ export function Services() {
             <StaggerItem
               as="li"
               key={item.name}
-              className="lift group relative flex flex-col overflow-hidden rounded-[2rem] bg-cream p-6 md:p-8"
+              className="lift group relative flex flex-col overflow-hidden rounded-[2rem] border-2 border-orange/45 bg-cream p-6 md:p-8"
             >
               <HousePattern color="rgb(248 134 64 / 0.2)" />
               <div className="relative flex flex-1 flex-col">

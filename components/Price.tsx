@@ -6,9 +6,9 @@ import { SectionHead } from "@/components/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { HousePattern } from "@/components/motion/HousePattern";
-
 const blocks = [price.programs, price.tutoring, price.consultations];
 const blockTones = ["#3CCB4E", "#8B5CFF", "#FF4D4D"];
+const rowTones = ["#2F9BFF", "#3CCB4E", "#8B5CFF", "#FF4D4D", "#FF4FA3", "#14C4C4", "#FF8A1E"];
 
 export function Price() {
   return (
@@ -25,21 +25,21 @@ export function Price() {
           lead={price.note}
         />
 
-        <div className="relative mt-14 overflow-hidden rounded-[2.5rem] bg-orange md:mt-16">
-          <HousePattern variant="fill" color="rgb(255 241 209 / 0.14)" density="plate" />
+        <div className="relative mt-14 overflow-hidden rounded-[2.5rem] md:mt-16">
           <Stagger as="ul" className="relative">
             {price.therapies.map((item, index) => (
               <StaggerItem
                 as="li"
                 key={`${item.name}-${item.duration}-${index}`}
                 className="border-b border-white/25 px-6 py-6 last:border-b-0 md:px-10 md:py-7"
+                style={{ backgroundColor: rowTones[index] }}
               >
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-10">
                   <div className="md:max-w-[28ch] md:pt-1">
                     <h3 className="font-sans text-xl font-semibold text-white md:text-2xl">
                       {item.name}
                     </h3>
-                    <p className="mt-1 text-base text-cream">{item.duration}</p>
+                    <p className="mt-1 text-base text-white/85">{item.duration}</p>
                   </div>
 
                   <dl className="flex flex-1 flex-col gap-3 md:max-w-md">
@@ -52,7 +52,7 @@ export function Price() {
                           className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1"
                         >
                           {label ? (
-                            <dt className="text-sm font-semibold uppercase tracking-[0.08em] text-cream">
+                            <dt className="text-sm font-semibold uppercase tracking-[0.08em] text-white/80">
                               {label}
                             </dt>
                           ) : (
@@ -62,7 +62,7 @@ export function Price() {
                             <span className="font-sans text-2xl font-bold text-white">
                               {option.pack}
                             </span>
-                            <span className="mt-1 block text-base text-cream md:mt-0 md:ml-3 md:inline">
+                            <span className="mt-1 block text-base text-white/85 md:mt-0 md:ml-3 md:inline">
                               разово {option.single}
                             </span>
                           </dd>
@@ -74,6 +74,7 @@ export function Price() {
               </StaggerItem>
             ))}
           </Stagger>
+          <HousePattern variant="fill" color="rgb(255 241 209 / 0.16)" density="plate" />
         </div>
 
         <Stagger as="ul" className="mt-5 grid gap-5 md:grid-cols-3" step={0.1}>

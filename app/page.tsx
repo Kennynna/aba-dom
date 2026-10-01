@@ -9,22 +9,25 @@ import { Faq } from "@/components/Faq";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { CallButton } from "@/components/CallButton";
-import { Seam } from "@/components/motion/Seam";
+import { SectionCut } from "@/components/SectionCut";
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        {/* cream → warm → cream → ember → cream → calm → подвал */}
         <Hero />
         <Value />
+        <SectionCut index={0} />
         <Services />
+        <SectionCut index={1} />
         <Price />
+        <SectionCut index={2} />
         <Diagnostics />
+        <SectionCut index={3} />
         <Route />
+        <SectionCut index={4} />
         <Faq />
-        <Seam from="var(--cream)" to="var(--blue-field)" />
         <Contact />
       </main>
       <Footer />

@@ -5,7 +5,6 @@ import { site } from "@/content/site";
 import { SectionHead } from "@/components/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { HousePattern } from "@/components/motion/HousePattern";
 
 export function Contact() {
   const { contact, contacts } = site;
@@ -16,8 +15,6 @@ export function Contact() {
       className="relative overflow-hidden bg-blue-field py-16 md:py-24 lg:py-32"
       aria-labelledby="contact-title"
     >
-      <HousePattern color="rgb(255 241 209 / 0.16)" density="plate" />
-
       <div className="relative mx-auto max-w-6xl px-5 md:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
