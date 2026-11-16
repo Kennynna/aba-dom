@@ -1,57 +1,17 @@
-import Image from "next/image";
 import { site } from "@/content/site";
-
+import { Reveal } from "@/components/motion/Reveal";
 export function Footer() {
   return (
-    <footer className="bg-blue-foot pb-24 pt-14 text-cream md:pb-14">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 md:flex-row md:items-start md:justify-between md:px-8">
-        <div className="max-w-sm">
-          <Image
-            src="/brand/wordmark-cream.png"
-            alt={`${site.brand} — ${site.tagline}`}
-            width={520}
-            height={480}
-            sizes="160px"
-            className="h-auto w-28 object-contain md:w-32"
-          />
-        </div>
-
-        <nav className="flex flex-col gap-3 text-base" aria-label="Навигация в подвале">
-          {site.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-cream/90 transition-colors duration-300 hover:text-cream"
-            >
-              {item.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="text-cream/90 transition-colors duration-300 hover:text-cream"
-          >
-            Контакты
-          </a>
+    <footer className="border-t border-blue/30 bg-blue/10 pb-28 pt-12 text-ink md:pb-12">
+      <Reveal className="mx-auto flex max-w-6xl flex-col gap-8 px-5 md:flex-row md:justify-between md:px-8">
+        <a href="#top" className="flex items-center gap-3 self-start" aria-label="авадом — на главную"><span aria-hidden className="brand-house h-12 w-12 bg-red" /><span className="font-display text-3xl text-red">{site.brand}</span></a>
+        <nav aria-label="Навигация в подвале" className="flex flex-col">
+          {site.nav.map(item => <a key={item.href} href={item.href} className="inline-flex min-h-12 items-center">{item.label}</a>)}
+          <a href="#contact" className="inline-flex min-h-12 items-center">Контакты</a>
         </nav>
-
-        <div className="flex flex-col gap-2">
-          <a
-            href={site.contacts.phoneHref}
-            className="font-display text-2xl text-cream"
-          >
-            {site.contacts.phone}
-          </a>
-          {site.contacts.addresses.map((address) => (
-            <p key={address} className="text-base text-cream/90">
-              {address}
-            </p>
-          ))}
-        </div>
-      </div>
-
-      <div className="mx-auto mt-12 max-w-6xl border-t border-cream/15 px-5 pt-6 md:px-8">
-        <p className="text-sm text-cream/80">{site.footer.copyright}</p>
-      </div>
+        <div className="max-w-sm space-y-3"><a href={site.contacts.phoneHref} className="inline-flex min-h-12 items-center text-xl font-medium">{site.contacts.phone}</a>{site.contacts.addresses.map(address=><p key={address} className="text-base">{address}</p>)}</div>
+      </Reveal>
+      <p className="mx-auto mt-10 max-w-6xl px-5 text-base md:px-8">{site.footer.copyright}</p>
     </footer>
   );
 }

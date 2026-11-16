@@ -28,27 +28,32 @@ export function Services() {
             <StaggerItem
               as="li"
               key={item.name}
-              className="lift group relative flex flex-col overflow-hidden rounded-[2rem] border-2 border-orange/45 bg-cream p-6 md:p-8"
+              className="lift group relative flex flex-col overflow-hidden rounded-[2rem] border border-blue/40 bg-blue/10 p-6 md:p-8"
             >
-              <HousePattern color="rgb(248 134 64 / 0.2)" />
+              <HousePattern color="rgb(89 155 180 / 0.12)" />
               <div className="relative flex flex-1 flex-col">
-                <h3 className="font-display text-2xl leading-tight text-orange md:text-[1.75rem]">
+                <h3 className="font-display text-2xl leading-tight text-ink md:text-[1.75rem]">
                   {item.name}
                 </h3>
                 <p className="mt-4 flex-1 text-base leading-relaxed text-muted">{item.text}</p>
-                <p className="mt-6 border-t border-orange/25 pt-4 text-base font-semibold text-ink">
-                  {item.meta}
-                </p>
+                {item.meta ? <p className="mt-6 border-t border-line pt-4 text-base font-medium text-ink">{item.meta}</p> : null}
               </div>
             </StaggerItem>
           ))}
         </Stagger>
 
         <Reveal delay={0.1}>
-          <div className="relative mt-12 overflow-hidden rounded-[2rem] bg-blue px-6 py-8 md:mt-14 md:px-10 md:py-10">
-            <HousePattern variant="fill" color="rgb(255 241 209 / 0.13)" />
+          <div className="services-ticket relative mt-12 overflow-hidden bg-blue-deep px-8 py-8 md:mt-14 md:px-14 md:py-10">
+            <svg className="absolute h-0 w-0" aria-hidden focusable="false">
+              <defs>
+                <clipPath id="services-ticket-shape" clipPathUnits="objectBoundingBox">
+                  <path d="M.04 0H.96Q1 0 1 .08V.40C.96 .40 .96 .60 1 .60V.92Q1 1 .96 1H.04Q0 1 0 .92V.60C.04 .60 .04 .40 0 .40V.08Q0 0 .04 0Z" />
+                </clipPath>
+              </defs>
+            </svg>
+            <HousePattern variant="fill" color="rgb(255 240 209 / 0.13)" />
             <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <h3 className="font-display text-2xl text-white md:text-3xl">
+              <h3 className="font-display text-2xl text-cream md:text-3xl">
                 {services.extra.title}
               </h3>
 
@@ -57,7 +62,7 @@ export function Services() {
                   <StaggerItem
                     as="li"
                     key={item}
-                    className="rounded-full bg-cream px-4 py-2 text-base font-medium text-ink"
+                    className="rounded-full bg-cream-soft px-4 py-2 text-base font-medium text-ink"
                   >
                     {item}
                   </StaggerItem>

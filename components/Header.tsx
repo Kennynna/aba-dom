@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useSafeReducedMotion } from "./motion/useSafeReducedMotion";
 import { site } from "@/content/site";
+import { MenuIcon } from "@/components/icons/Controls";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full bg-cream/92 px-4 backdrop-blur-md transition-shadow duration-500 md:h-[4.5rem] md:px-6 ${
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full bg-cream px-4 backdrop-blur-md transition-shadow duration-500 md:h-[4.5rem] md:px-6 ${
           scrolled || open
             ? "shadow-[0_12px_32px_-16px_rgba(31,26,23,0.45)]"
             : "shadow-[0_10px_24px_-18px_rgba(31,26,23,0.28)]"
@@ -42,15 +43,8 @@ export function Header() {
           onClick={close}
           aria-label={`${site.brand} — на главную`}
         >
-          <Image
-            src="/brand/house-orange.png"
-            alt=""
-            width={44}
-            height={48}
-            className="h-8 w-auto object-contain md:h-9"
-            priority
-          />
-          <span className="font-display text-2xl leading-none text-orange md:text-[1.75rem]">
+          <span aria-hidden className="brand-house h-9 w-9 shrink-0 bg-red" />
+          <span className="font-display text-2xl leading-none text-red md:text-[1.75rem]">
             {site.brand}
           </span>
         </a>
@@ -60,7 +54,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="font-display text-[0.95rem] font-bold tracking-[0.04em] text-orange uppercase transition-colors duration-300 hover:text-ink"
+              className="font-sans text-[0.95rem] font-medium text-ink uppercase transition-colors duration-300 hover:text-ink"
             >
               {item.label}
             </a>
@@ -70,39 +64,20 @@ export function Header() {
         <div className="flex items-center gap-2">
           <a
             href={site.contacts.phoneHref}
-            className="lift inline-flex min-h-11 items-center rounded-full bg-orange px-4 text-sm font-semibold text-white md:px-5 md:text-[0.95rem]"
+            className="lift inline-flex min-h-12 items-center rounded-full bg-red px-4 text-sm font-medium text-cream md:px-5 md:text-[0.95rem]"
           >
             Позвонить
           </a>
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-orange/12 transition-colors duration-300 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-deep text-cream transition-colors duration-300 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
             onClick={() => setOpen((value) => !value)}
           >
-            <span className="relative block h-3.5 w-4.5">
-              {[0, 1, 2].map((line) => (
-                <span
-                  key={line}
-                  className={`absolute left-0 h-[2px] w-full rounded bg-ink transition-all duration-300 ${
-                    line === 0
-                      ? open
-                        ? "top-[6px] rotate-45"
-                        : "top-0"
-                      : line === 1
-                        ? open
-                          ? "top-[6px] opacity-0"
-                          : "top-[6px] opacity-100"
-                        : open
-                          ? "top-[6px] -rotate-45"
-                          : "top-[12px]"
-                  }`}
-                />
-              ))}
-            </span>
+            <MenuIcon expanded={open} />
           </button>
         </div>
       </div>
@@ -122,7 +97,7 @@ export function Header() {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  className="border-b border-line py-4 font-display text-xl font-bold tracking-[0.04em] text-orange uppercase"
+                  className="border-b border-line py-4 font-sans text-xl font-medium text-ink uppercase"
                   onClick={close}
                   initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -133,7 +108,7 @@ export function Header() {
               ))}
               <a
                 href="#contact"
-                className="border-b border-line py-4 font-display text-xl font-bold tracking-[0.04em] text-orange uppercase"
+                className="border-b border-line py-4 font-sans text-xl font-medium text-ink uppercase"
                 onClick={close}
               >
                 Контакты
@@ -142,7 +117,7 @@ export function Header() {
 
             <a
               href={site.contacts.phoneHref}
-              className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-orange px-6 text-base font-semibold text-white"
+              className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-red px-6 text-base font-medium text-cream"
               onClick={close}
             >
               {site.contacts.phone}

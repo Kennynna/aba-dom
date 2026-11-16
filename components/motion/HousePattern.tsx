@@ -9,7 +9,7 @@ type HousePatternProps = {
 
 /** Декоративная плитка домиков для небольших блоков. Не на всю страницу. */
 export function HousePattern({
-  color = "rgb(248 134 64 / 0.18)",
+  color = "rgb(221 74 64 / 0.18)",
   variant = "outline",
   density = "card",
   className = "",

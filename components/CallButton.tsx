@@ -29,7 +29,7 @@ export function CallButton() {
         >
           <a
             href={site.contacts.phoneHref}
-            className="flex min-h-13 items-center justify-center rounded-full bg-orange px-6 text-base font-semibold text-ink shadow-[0_14px_30px_-10px_rgba(31,26,23,0.5)]"
+            className="flex min-h-13 items-center justify-center rounded-full bg-red px-6 text-base font-medium text-cream shadow-[0_14px_30px_-10px_rgba(31,26,23,0.5)]"
           >
             Позвонить · {site.contacts.phone}
           </a>

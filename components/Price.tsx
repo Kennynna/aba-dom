@@ -1,122 +1,47 @@
-"use client";
-
 import { price } from "@/content/price";
 import { site } from "@/content/site";
 import { SectionHead } from "@/components/SectionHead";
-import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { HousePattern } from "@/components/motion/HousePattern";
+import { Reveal } from "@/components/motion/Reveal";
 const blocks = [price.programs, price.tutoring, price.consultations];
-const blockTones = ["#3CCB4E", "#8B5CFF", "#FF4D4D"];
-const rowTones = ["#2F9BFF", "#3CCB4E", "#8B5CFF", "#FF4D4D", "#FF4FA3", "#14C4C4", "#FF8A1E"];
-
 export function Price() {
   return (
-    <section
-      id={price.id}
-      className="relative bg-cream py-16 md:py-24 lg:py-32"
-      aria-labelledby="price-title"
-    >
+    <section id={price.id} className="bg-cream py-16 md:py-24 lg:py-32" aria-labelledby="price-title">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <SectionHead
-          id="price-title"
-          eyebrow="Цены"
-          title={price.title}
-          lead={price.note}
-        />
-
-        <div className="relative mt-14 overflow-hidden rounded-[2.5rem] md:mt-16">
-          <Stagger as="ul" className="relative">
-            {price.therapies.map((item, index) => (
-              <StaggerItem
-                as="li"
-                key={`${item.name}-${item.duration}-${index}`}
-                className="border-b border-white/25 px-6 py-6 last:border-b-0 md:px-10 md:py-7"
-                style={{ backgroundColor: rowTones[index] }}
-              >
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-10">
-                  <div className="md:max-w-[28ch] md:pt-1">
-                    <h3 className="font-sans text-xl font-semibold text-white md:text-2xl">
-                      {item.name}
-                    </h3>
-                    <p className="mt-1 text-base text-white/85">{item.duration}</p>
-                  </div>
-
-                  <dl className="flex flex-1 flex-col gap-3 md:max-w-md">
-                    {item.options.map((option, optionIndex) => {
-                      const label = "label" in option ? option.label : null;
-
-                      return (
-                        <div
-                          key={label ?? optionIndex}
-                          className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1"
-                        >
-                          {label ? (
-                            <dt className="text-sm font-semibold uppercase tracking-[0.08em] text-white/80">
-                              {label}
-                            </dt>
-                          ) : (
-                            <dt className="sr-only">Стоимость</dt>
-                          )}
-                          <dd className="ml-auto text-right">
-                            <span className="font-sans text-2xl font-bold text-white">
-                              {option.pack}
-                            </span>
-                            <span className="mt-1 block text-base text-white/85 md:mt-0 md:ml-3 md:inline">
-                              разово {option.single}
-                            </span>
-                          </dd>
-                        </div>
-                      );
-                    })}
-                  </dl>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <HousePattern variant="fill" color="rgb(255 241 209 / 0.16)" density="plate" />
-        </div>
-
-        <Stagger as="ul" className="mt-5 grid gap-5 md:grid-cols-3" step={0.1}>
-          {blocks.map((block, index) => (
-            <StaggerItem
-              as="li"
-              key={block.title}
-              className="rounded-[2rem] p-6 md:p-7"
-              style={{ backgroundColor: blockTones[index] }}
-            >
-              <h3 className="font-sans text-xl font-bold text-white md:text-2xl">{block.title}</h3>
-              <dl className="mt-5 flex flex-col gap-3.5">
-                {block.items.map((row) => (
-                  <div
-                    key={row.name}
-                    className="flex items-baseline justify-between gap-x-4 border-b border-white/30 pb-3.5 last:border-b-0 last:pb-0"
-                  >
-                    <dt className="min-w-0 text-base font-bold leading-snug text-white">
-                      {row.name}
-                    </dt>
-                    <dd className="shrink-0 text-right font-sans text-lg font-bold whitespace-nowrap text-white md:text-xl">
-                      {row.price}
-                    </dd>
+        <SectionHead id="price-title" eyebrow="Цены" title={price.title} lead={price.note} />
+        <Stagger as="ul" className="mt-12 overflow-hidden rounded-[2rem] border border-line" step={0.06}>
+          {price.therapies.map((item,index) => (
+            <StaggerItem as="li" key={index} className="border-b border-blue/25 bg-cream-soft p-6 odd:bg-blue/10 last:border-0 md:p-8">
+              <div className="grid gap-5 lg:grid-cols-2 lg:gap-10">
+                <div><h3 className="font-display text-2xl">{item.name}</h3><p className="mt-2 text-base">{item.duration}</p></div>
+                <dl className="space-y-5">
+                  {item.options.map((option,i) => (
+                    <div key={i} className="flex flex-wrap items-baseline justify-between gap-3">
+                      <dt className="text-base font-medium">{"label" in option ? option.label : "Без куратора"}</dt>
+                      <dd className="ml-auto text-right"><span className="text-2xl font-medium whitespace-nowrap">{option.pack}</span><span className="mt-1 block text-base">разово {option.single}</span></dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
+        <Stagger as="ul" className="mt-5 grid gap-5 lg:grid-cols-3">
+          {blocks.map(block => (
+            <StaggerItem as="li" key={block.title} className="min-w-0 rounded-[2rem] border border-blue/30 bg-blue/10 p-6">
+              <h3 className="font-display text-2xl">{block.title}</h3>
+              <dl className="mt-6 space-y-4">
+                {block.items.map(row => (
+                  <div key={row.name} className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-4 last:border-0 last:pb-0">
+                    <dt className="text-base leading-relaxed">{row.name}</dt>
+                    <dd className="ml-auto whitespace-nowrap text-lg font-medium">{row.price}</dd>
                   </div>
                 ))}
               </dl>
             </StaggerItem>
           ))}
         </Stagger>
-
-        <Reveal delay={0.1}>
-          <p className="mt-8 text-base leading-relaxed text-muted">
-            Точную сумму под ваш маршрут подскажет менеджер —{" "}
-            <a
-              href={site.contacts.phoneHref}
-              className="font-semibold text-ink underline decoration-orange underline-offset-4"
-            >
-              {site.contacts.phone}
-            </a>
-            .
-          </p>
-        </Reveal>
+        <Reveal><p className="mt-8 text-base leading-relaxed">Итоговую сумму по вашему маршруту подскажет менеджер: <a href={site.contacts.phoneHref} className="underline decoration-red underline-offset-4">{site.contacts.phone}</a>.</p></Reveal>
       </div>
     </section>
   );

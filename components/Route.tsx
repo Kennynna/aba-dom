@@ -6,7 +6,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { HousePattern } from "@/components/motion/HousePattern";
 
-const stepTones = ["#2F9BFF", "#3CCB4E", "#8B5CFF", "#FF4D4D"];
 
 export function Route() {
   const { route, contacts } = site;
@@ -25,33 +24,32 @@ export function Route() {
           lead={route.lead}
         />
 
-        <Stagger as="ol" className="relative mt-14 grid gap-5 md:mt-16 md:grid-cols-4" step={0.12}>
-          {route.steps.map((step, index) => (
+        <Stagger as="ol" className="relative mt-14 grid gap-5 md:mt-16 md:grid-cols-2 lg:grid-cols-4" step={0.12}>
+          {route.steps.map((step) => (
             <StaggerItem
               as="li"
               key={step.number}
-              className="flex flex-col rounded-[2rem] p-6 text-white"
-              style={{ backgroundColor: stepTones[index] }}
+              className="flex flex-col rounded-[2rem] border border-blue/30 bg-blue/10 p-6 text-ink"
             >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-white/20 font-display text-xl text-white">
+              <span className="route-step-mark grid h-14 w-14 place-items-center bg-blue-deep pb-1 font-display text-xl text-cream">
                 {step.number}
               </span>
-              <h3 className="mt-5 font-display text-xl text-white md:text-2xl">{step.title}</h3>
-              <p className="mt-2.5 text-base leading-relaxed text-white">{step.text}</p>
+              <h3 className="mt-5 font-display text-xl text-ink md:text-2xl">{step.title}</h3>
+              <p className="mt-2.5 text-base leading-relaxed text-ink">{step.text}</p>
             </StaggerItem>
           ))}
         </Stagger>
 
         <Reveal delay={0.1}>
-          <div className="relative mt-12 overflow-hidden rounded-[2.5rem] bg-cream-deep p-6 text-center md:mt-16 md:p-10">
-            <HousePattern color="rgb(90 156 181 / 0.2)" />
+          <div className="route-callout relative mt-12 overflow-hidden bg-blue-deep px-6 py-10 text-center md:mt-16 md:px-12 md:py-12">
+            <HousePattern color="rgb(255 240 209 / 0.12)" />
             <div className="relative">
-              <p className="mx-auto max-w-[40ch] font-display text-xl leading-snug text-orange md:text-2xl">
+              <p className="mx-auto max-w-[40ch] font-display text-xl leading-snug text-cream md:text-2xl">
                 {route.shortcut}
               </p>
               <a
                 href={contacts.phoneHref}
-                className="lift mx-auto mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-orange px-7 text-base font-semibold text-white sm:w-auto"
+                className="lift mx-auto mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-red px-7 text-base font-medium text-cream sm:w-auto"
               >
                 {contacts.phone}
               </a>

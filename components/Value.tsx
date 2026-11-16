@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { site } from "@/content/site";
 import { SectionHead } from "@/components/SectionHead";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { HousePattern } from "@/components/motion/HousePattern";
+import { Reveal } from "@/components/motion/Reveal";
 
-const pointIcons = [RouteIcon, ProgramIcon, FamilyIcon];
+const pointIcons = [ProgramIcon, RouteIcon, FamilyIcon];
 
 function RouteIcon() {
   return (
@@ -62,22 +65,26 @@ export function Value() {
             title={value.title}
             lead={value.lead}
           />
-          <div className="lg:justify-self-end">
-            <svg className="absolute h-0 w-0" aria-hidden focusable="false">
+          <Reveal delay={0.12} className="mx-auto w-60 md:w-80 lg:w-full lg:max-w-sm">
+          <div aria-hidden className="value-emblem relative grid aspect-square w-full place-items-center bg-blue/15">
+            <svg className="absolute h-0 w-0" focusable="false">
               <defs>
-                <clipPath id="slogan-wrap" clipPathUnits="objectBoundingBox">
-                  <path d="M0.14,0.22 C0.04,0.1 0.28,0.02 0.5,0.06 C0.74,0.01 0.97,0.14 0.95,0.36 C1,0.58 0.88,0.84 0.64,0.94 C0.38,1.02 0.08,0.88 0.05,0.62 C0.02,0.4 0.06,0.3 0.14,0.22 Z" />
+                <clipPath id="value-speech-shape" clipPathUnits="objectBoundingBox">
+                  <path d="M.16 .04H.84Q.98 .04 .98 .18V.70Q.98 .84 .84 .84H.78L.67 .98Q.65 1 .64 .97L.59 .84H.16Q.02 .84 .02 .70V.18Q.02 .04 .16 .04Z" />
                 </clipPath>
               </defs>
             </svg>
-            <div className="slogan-wrap px-10 py-14 text-center sm:px-14 sm:py-16">
-              <p className="font-display text-[clamp(2.4rem,4.6vw,3.8rem)] leading-[1.05] text-cream">
-                Ты не одна,
-                <br />
-                мы рядом
-              </p>
-            </div>
+            <HousePattern color="rgb(89 155 180 / 0.18)" />
+            <Image
+              src="/brand/value-house-lockup.jpg"
+              alt="авадом — центр коррекции речи и поведения"
+              width={6250}
+              height={6250}
+              sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 240px"
+              className="relative h-auto w-full object-contain"
+            />
           </div>
+          </Reveal>
         </div>
 
         <Stagger as="ul" className="mt-14 grid gap-5 md:mt-16 md:grid-cols-3" step={0.1}>
@@ -88,13 +95,13 @@ export function Value() {
             <StaggerItem
               as="li"
               key={point.title}
-              className="lift relative overflow-hidden rounded-[2rem] bg-cream-deep/70 p-6 md:p-7"
+              className="lift relative overflow-hidden rounded-[2rem] border border-blue/30 bg-cream-soft p-6 md:p-7"
             >
               <div className="relative">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-deep">
                   <Icon />
                 </span>
-                <h3 className="mt-5 font-sans text-xl font-medium text-ink md:text-2xl">
+                <h3 className="mt-5 font-display text-xl font-normal text-ink md:text-2xl">
                   {point.title}
                 </h3>
                 <p className="mt-3 font-sans text-base leading-relaxed text-muted">{point.text}</p>

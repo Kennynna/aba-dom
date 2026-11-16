@@ -5,9 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/content/site";
 import { SectionHead } from "@/components/SectionHead";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { PlusMinusIcon } from "@/components/icons/Controls";
 
 export function Faq() {
-  const { faq } = site;
+  const { faq, contacts } = site;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -24,34 +25,25 @@ export function Faq() {
             const isOpen = openIndex === index;
 
             return (
-              <StaggerItem as="li" key={item.q} className="border-b border-line">
+              <StaggerItem as="li" key={item.q} className="border-b border-blue/25 py-2">
                 <h3>
                   <button
                     type="button"
-                    className="flex w-full items-start justify-between gap-5 py-5 text-left transition-colors duration-300 hover:text-ink"
+                    className="flex w-full items-center justify-between gap-5 rounded-2xl bg-blue-deep px-4 py-5 text-left text-cream transition-colors duration-300 hover:text-cream"
                     aria-expanded={isOpen}
                     aria-controls={`faq-panel-${index}`}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                   >
-                    <span className="text-base font-semibold leading-snug md:text-lg">
+                    <span className="text-base font-medium leading-snug md:text-lg">
                       {item.q}
                     </span>
                     <span
-                      className={`relative mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
-                        isOpen ? "bg-orange" : "bg-orange/15"
+                      className={`grid h-7 w-7 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
+                        isOpen ? "bg-red text-cream" : "bg-cream text-blue-deep"
                       }`}
                       aria-hidden
                     >
-                      <span
-                        className={`absolute h-[2px] w-3 rounded transition-colors duration-300 ${
-                          isOpen ? "bg-cream" : "bg-orange"
-                        }`}
-                      />
-                      <span
-                        className={`absolute h-3 w-[2px] rounded transition-all duration-300 ${
-                          isOpen ? "scale-y-0 bg-cream" : "scale-y-100 bg-orange"
-                        }`}
-                      />
+                      <PlusMinusIcon expanded={isOpen} />
                     </span>
                   </button>
                 </h3>
@@ -75,6 +67,15 @@ export function Faq() {
               </StaggerItem>
             );
           })}
+        </Stagger>
+
+        <Stagger className="mt-12 grid gap-5 lg:grid-cols-3">
+          {faq.reviews.map(review => (
+            <StaggerItem as="figure" key={review.author} className="flex flex-col rounded-[2rem] border border-blue/30 bg-blue/10 p-6">
+              <blockquote className="flex-1 text-base leading-relaxed"><p>{review.text}</p></blockquote>
+              <figcaption className="mt-6 border-t border-line pt-4 text-base"><span className="block font-medium">{review.author}</span><a href={contacts.reviews} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block py-2 underline decoration-red underline-offset-4">Отзыв из 2ГИС</a></figcaption>
+            </StaggerItem>
+          ))}
         </Stagger>
       </div>
     </section>

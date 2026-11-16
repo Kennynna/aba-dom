@@ -17,7 +17,7 @@ type ItemProps = {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
-  as?: "div" | "li" | "article";
+  as?: "div" | "li" | "article" | "figure";
 };
 
 const itemVariants = {

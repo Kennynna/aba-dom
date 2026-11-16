@@ -1,194 +1,177 @@
 @import "tailwindcss";
-
 :root {
-  --cream: #fff1d1;
-  --cream-deep: #fbe4ba;
-  --orange: #f88640;
-  --salmon: #e76f51;
-  --blue: #5a9cb5;
-  --blue-deep: #427a91;
-  --red: #dd4b40;
-  --ink: #1f1a17;
-  --muted: #6b5e55;
-  --line: #efdcb6;
-  /* Тот же синий, чуть глубже: кремовый текст на нём уже читается */
-  --blue-field: color-mix(in srgb, var(--blue) 65%, var(--ink));
-  --blue-foot: color-mix(in srgb, var(--blue) 42%, var(--ink));
+  --cream: #FFF0D1;
+  --cream-soft: #FFF1D2;
+  --blue: #599BB4;
+  --blue-deep: #4D869B;
+  --red: #DD4A40;
+  --ink: #1F1A17;
 }
-
 @theme inline {
   --color-cream: var(--cream);
-  --color-cream-deep: var(--cream-deep);
-  --color-orange: var(--orange);
-  --color-salmon: var(--salmon);
+  --color-cream-soft: var(--cream-soft);
   --color-blue: var(--blue);
   --color-blue-deep: var(--blue-deep);
-  --color-blue-field: var(--blue-field);
-  --color-blue-foot: var(--blue-foot);
   --color-red: var(--red);
   --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
-  --font-display: var(--font-lena);
-  --font-sans: var(--font-commissioner);
+  --color-muted: var(--ink);
+  --color-line: var(--blue);
+  --font-display: var(--font-lena), var(--font-commissioner), sans-serif;
+  --font-sans: var(--font-commissioner), sans-serif;
 }
-
-html {
-  scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+html.lenis, html.lenis body { height: auto; }
+body { background: var(--cream); color: var(--ink); font-family: var(--font-commissioner), sans-serif; }
+button, [role="button"] { cursor: pointer; }
+section[id] { scroll-margin-top: 6rem; }
+.font-display { font-weight: 400; font-synthesis: none; }
+::selection { background: var(--red); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.brand-house {
+  aspect-ratio: 1;
+  mask: url(/brand/house-orange.png) center / contain no-repeat;
+  -webkit-mask: url(/brand/house-orange.png) center / contain no-repeat;
 }
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: var(--font-commissioner), system-ui, sans-serif;
-  overflow-x: hidden;
-}
-
-section[id] {
-  scroll-margin-top: 5.5rem;
-}
-
-::selection {
-  background: color-mix(in srgb, var(--orange) 40%, white);
-  color: var(--ink);
-}
-
-:focus-visible {
-  outline: 3px solid var(--orange);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* Градиенты из фирменного кита */
-.grad-warm {
-  background-image: linear-gradient(180deg, var(--orange) 0%, var(--salmon) 100%);
-}
-
-.grad-ember {
-  background-image: linear-gradient(100deg, var(--red) 0%, var(--orange) 100%);
-}
-
-.grad-calm {
-  background-image: linear-gradient(180deg, var(--cream) 0%, var(--blue) 100%);
-}
-
-/* Плитка домиков. Цвет задаётся background-color, форма — маской */
-.houses {
-  --tile: 88px;
-  mask-image: var(--houses-src);
-  mask-size: var(--tile);
-  mask-repeat: repeat;
-  -webkit-mask-image: var(--houses-src);
-  -webkit-mask-size: var(--tile);
-  -webkit-mask-repeat: repeat;
-}
-
-.houses-plate {
-  --tile: 140px;
-}
-
-/* На карточках домики остаются по краю, чтобы не спорить с текстом */
-.houses-edge {
-  -webkit-mask-image: var(--houses-src), linear-gradient(145deg, transparent 0%, #000 70%);
-  -webkit-mask-size: var(--tile), cover;
-  -webkit-mask-repeat: repeat, no-repeat;
-  -webkit-mask-composite: source-in;
-  mask-image: var(--houses-src), linear-gradient(145deg, transparent 0%, #000 70%);
-  mask-size: var(--tile), cover;
-  mask-repeat: repeat, no-repeat;
-  mask-composite: intersect;
-}
-
-@media (min-width: 768px) {
-  .houses {
-    --tile: 104px;
-  }
-
-  .houses-plate {
-    --tile: 190px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .houses {
-    --tile: 120px;
-  }
-
-  .houses-plate {
-    --tile: 230px;
-  }
-}
-
 .hero-silhouette {
   aspect-ratio: 1400 / 886;
-  background-color: var(--orange);
-  -webkit-mask-image: url(/brand/silhouette-play.png);
-  mask-image: url(/brand/silhouette-play.png);
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  background-color: var(--blue-deep);
+  -webkit-mask: url(/brand/silhouette-play.png) center / contain no-repeat;
+  mask: url(/brand/silhouette-play.png) center / contain no-repeat;
   filter: drop-shadow(0 24px 40px rgba(31, 26, 23, 0.18));
 }
-
-/* Мягкий разрез hero: на мобилке нижняя кремовая часть, от lg — правая */
-.slogan-wrap {
-  background: linear-gradient(165deg, var(--orange), var(--salmon));
-  clip-path: url(#slogan-wrap);
+.hero-brand {
+  position: relative;
+  display: inline-block;
+  padding-bottom: .12em;
+  color: var(--red);
+  font-size: clamp(3.6rem, 8.5vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -.035em;
 }
-
-.hero-split {
-  clip-path: url(#hero-split-mobile);
+.hero-brand-stroke {
+  position: absolute;
+  inset: auto 0 -.06em;
+  width: 100%;
+  height: .24em;
+  color: var(--blue-deep);
+  pointer-events: none;
 }
-
+.hero-diagonal {
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(24rem, 50vw, 28rem);
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-clip-path: url(#hero-diagonal-mobile);
+  clip-path: url(#hero-diagonal-mobile);
+}
+.hero-diagonal-panel { background: var(--blue); }
+.hero-diagonal-edge {
+  background: var(--blue-deep);
+  transform: translateY(-10px);
+}
+.hero-diagonal-panel .houses { transform: rotate(-12deg) scale(1.25); }
+.hero-art .hero-silhouette { background-color: var(--cream); }
 @media (min-width: 1024px) {
-  .hero-split {
-    clip-path: url(#hero-split-desktop);
+  .hero-diagonal {
+    inset: 0;
+    height: auto;
+    -webkit-clip-path: url(#hero-diagonal-desktop);
+    clip-path: url(#hero-diagonal-desktop);
   }
+  .hero-diagonal-edge { transform: translateX(-10px); }
 }
-
-/* Медленный дрейф фона внутри тёплого градиента */
-.warm-drift {
-  background-size: 100% 240%;
-  animation: warm-drift 28s ease-in-out infinite;
-}
-
-@keyframes warm-drift {
-  0%,
-  100% {
-    background-position: 50% 8%;
-  }
-  50% {
-    background-position: 50% 92%;
-  }
-}
-
-/* Подъём только там, где есть настоящий hover. На таче класс не залипает */
+.houses { --tile: 88px; mask-image: var(--houses-src); mask-size: var(--tile); mask-repeat: repeat; -webkit-mask-image: var(--houses-src); -webkit-mask-size: var(--tile); -webkit-mask-repeat: repeat; }
+.houses-plate { --tile: 140px; }
+@media (min-width: 768px) { .houses { --tile: 104px; } .houses-plate { --tile: 190px; } }
+@media (min-width: 1024px) { .houses { --tile: 120px; } .houses-plate { --tile: 230px; } }
 @media (hover: hover) and (pointer: fine) {
-  .lift {
-    transition: transform 0.45s ease, box-shadow 0.45s ease;
-  }
-
-  .lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 30px -14px rgba(31, 26, 23, 0.4);
-  }
+  .lift { transition: transform .3s ease; }
+  .lift:hover { transform: translateY(-3px); }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .warm-drift {
-    animation: none;
-    background-size: 100% 100%;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.contact-illustration {
+  mask: url(/brand/silhouette-outline.png) center / contain no-repeat;
+  -webkit-mask: url(/brand/silhouette-outline.png) center / contain no-repeat;
+}
+
+/* Фирменные формы в существующих блоках: облачко, билет и маршрутная лента. */
+.value-emblem {
+  -webkit-clip-path: url(#value-speech-shape);
+  clip-path: url(#value-speech-shape);
+}
+.services-ticket {
+  -webkit-clip-path: url(#services-ticket-shape);
+  clip-path: url(#services-ticket-shape);
+}
+.route-step-mark {
+  -webkit-clip-path: polygon(50% 0, 100% 24%, 100% 82%, 72% 82%, 59% 100%, 54% 82%, 0 82%, 0 24%);
+  clip-path: polygon(50% 0, 100% 24%, 100% 82%, 72% 82%, 59% 100%, 54% 82%, 0 82%, 0 24%);
+}
+.route-callout {
+  -webkit-clip-path: polygon(0 10%, 94% 0, 100% 16%, 100% 90%, 6% 100%, 0 84%);
+  clip-path: polygon(0 10%, 94% 0, 100% 16%, 100% 90%, 6% 100%, 0 84%);
+}
+
+/* Красная тема ограничена диагностикой, включая её окно консультации. */
+.diagnostics-theme {
+  --blue: var(--red);
+  --blue-deep: var(--red);
+}
+.diagnostic-card-motif::before,
+.diagnostic-card-motif::after { content: ""; position: absolute; }
+.diagnostic-card-motif::before {
+  inset: 0;
+  background: currentColor;
+  -webkit-clip-path: var(--motif);
+  clip-path: var(--motif);
+}
+.diagnostic-card-motif[data-motif="compass"] {
+  --motif: polygon(50% 0, 62% 36%, 100% 50%, 64% 62%, 50% 100%, 36% 64%, 0 50%, 36% 36%);
+}
+.diagnostic-card-motif[data-motif="energy"] {
+  --motif: polygon(58% 0, 12% 57%, 44% 57%, 35% 100%, 88% 39%, 56% 39%);
+}
+.diagnostic-card-motif[data-motif="memory"] {
+  --motif: polygon(8% 0, 70% 0, 100% 30%, 100% 100%, 8% 100%);
+}
+.diagnostic-card-motif[data-motif="memory"]::after {
+  inset: 12px 7px 9px 10px;
+  border-block: 2px solid var(--cream);
+}
+.diagnostic-card-motif[data-motif="focus"] { --motif: circle(48%); }
+.diagnostic-card-motif[data-motif="focus"]::after {
+  inset: 7px;
+  border: 5px solid var(--cream);
+  border-radius: 50%;
+}
+.diagnostic-card-motif[data-motif="speech"] {
+  --motif: polygon(0 0, 100% 0, 100% 74%, 68% 74%, 45% 100%, 45% 74%, 0 74%);
+}
+.diagnostic-card-motif[data-motif="movement"] {
+  --motif: polygon(0 0, 38% 0, 38% 30%, 70% 30%, 70% 62%, 100% 62%, 100% 100%, 62% 100%, 62% 70%, 30% 70%, 30% 38%, 0 38%);
+}
+.diagnostic-card-motif[data-motif="balance"] {
+  --motif: polygon(50% 18%, 64% 4%, 84% 4%, 100% 21%, 100% 43%, 50% 96%, 0 43%, 0 21%, 16% 4%, 36% 4%);
+}
+
+/* Исходные SVG из Simple Icons, без перерисовки контуров. */
+.social-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  background-color: currentColor;
+  -webkit-mask: var(--social-icon-src) center / contain no-repeat;
+  mask: var(--social-icon-src) center / contain no-repeat;
+}
+.social-icon-whatsapp { --social-icon-src: url(/icons/whatsapp.svg); }
+.social-icon-instagram { --social-icon-src: url(/icons/instagram.svg); }
+
+.consult-dialog[open]::backdrop { animation: consult-backdrop-in .32s ease both; }
+.consult-dialog[open][data-visible="false"]::backdrop { animation: consult-backdrop-out .2s ease both; }
+@keyframes consult-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes consult-backdrop-out { from { opacity: 1; } to { opacity: 0; } }

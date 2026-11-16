@@ -8,23 +8,30 @@ const lena = localFont({
   variable: "--font-lena",
   weight: "400",
   display: "swap",
+  fallback: ["Commissioner", "sans-serif"],
 });
 
 const commissioner = localFont({
   src: "./fonts/Commissioner.ttf",
   variable: "--font-commissioner",
-  weight: "300 700",
+  weight: "400 500",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "авадом — центр коррекции речи и поведения",
-  description:
-    "ABA-терапия, денверская модель (ESDM) и интенсивы. Сопровождаем семью: понятный маршрут, спокойный процесс, поддержка родителей.",
+  description: "Центр коррекции речи и поведения в Грозном: ABA-терапия, денверская модель (ESDM), индивидуальные программы, нейропедагогическая диагностика.",
+  metadataBase: new URL("https://aba-dom.vercel.app"),
+  twitter: {
+    card: "summary_large_image",
+    title: "авадом — центр коррекции речи и поведения",
+    description: "ABA-терапия, денверская модель (ESDM), индивидуальные программы развития. Консультация онлайн или офлайн.",
+    images: ["/opengraph-image"],
+  },
   openGraph: {
     title: "авадом — центр коррекции речи и поведения",
-    description: "Ты не одна, мы рядом. ABA-терапия, ESDM, интенсивы и сопровождение семьи.",
-    images: ["/brand/og.jpg"],
+    description: "ABA-терапия, денверская модель (ESDM), индивидуальные программы развития. Консультация онлайн или офлайн.",
+    images: ["/opengraph-image"],
     type: "website",
   },
 };
