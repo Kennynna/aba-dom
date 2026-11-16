@@ -1,7 +1,6 @@
 import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { ConsultButton } from "@/components/ConsultButton";
-import { HousePattern } from "@/components/motion/HousePattern";
 export function Hero() {
   const [brandName, description] = site.hero.title.split(" — ");
 
@@ -17,20 +16,13 @@ export function Hero() {
           </clipPath>
         </defs>
       </svg>
-      <HousePattern color="rgb(221 74 64 / 0.08)" density="plate" />
       <div aria-hidden className="hero-diagonal hero-diagonal-edge" />
-      <div aria-hidden className="hero-diagonal hero-diagonal-panel">
-        <HousePattern color="rgb(255 240 209 / 0.22)" density="plate" />
-      </div>
+      <div aria-hidden className="hero-diagonal hero-diagonal-panel" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <Reveal>
-          <p className="mb-6 flex items-center gap-3 text-base"><span aria-hidden className="h-2 w-2 rounded-full bg-red" />{site.tagline}</p>
           <h1 id="hero-title" className="font-display leading-[1.1] text-ink">
             <span className="hero-brand">
               {brandName}
-              <svg aria-hidden focusable="false" viewBox="0 0 420 28" className="hero-brand-stroke" fill="none">
-                <path d="M5 18C108 5 259 4 412 12M283 20C328 17 369 18 399 22" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-              </svg>
             </span>
             <span className="sr-only"> — </span>
             <span className="mt-5 block text-[clamp(2rem,3.7vw,3.25rem)]">{description}</span>

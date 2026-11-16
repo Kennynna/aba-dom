@@ -44,9 +44,6 @@ export function Header() {
           aria-label={`${site.brand} — на главную`}
         >
           <span aria-hidden className="brand-house h-9 w-9 shrink-0 bg-red" />
-          <span className="font-display text-2xl leading-none text-red md:text-[1.75rem]">
-            {site.brand}
-          </span>
         </a>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Основная навигация">
